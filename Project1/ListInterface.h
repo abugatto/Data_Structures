@@ -3,7 +3,7 @@
  *
  * @brief Interface file for the List ADT
  * 
- * @author Rory Pierce
+ * @author Anthony Bugatto
  * 
  * @details Specifies the implementation contract of the List ADT
  *
@@ -17,8 +17,7 @@
 #define _LIST_INTERFACE
 
 template<class ItemType>
-class ListInterface
-{
+class ListInterface {
 public:
    /** Sees whether this list is empty.
     @return True if the list is empty; otherwise returns false. */
@@ -66,4 +65,5 @@ public:
     @param newEntry  The replacement entry. */
    virtual void replace(int position, const ItemType& newEntry) = 0;
 }; // end ListInterface
+
 #endif
