@@ -13,18 +13,20 @@
  *       Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
  */
 
-#ifndef PVE_CPP
-#define PVE_CPP
+#ifndef PVE_H
+#define PVE_H
 
 #include <stdexcept>
 #include <string>
 
- using namespace std;
+using namespace std;
 
-class PrecondViolatedExcept: public logic_error {
+class PrecondViolatedExcep: public logic_error {
 public:
-	PrecondViolatedExcept(const string& message = "");
-}
+	/** Outputs error messages
+    @param message is the error message string*/
+	PrecondViolatedExcep(const string& message = "");
+};
 
 #include "PrecondViolatedExcep.cpp"
 #endif

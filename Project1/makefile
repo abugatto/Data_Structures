@@ -1,22 +1,11 @@
-CC = g++
-DEBUG = -g
-CFLAGS = -Wall -c $(DEBUG)
-LFLAGS = -Wall $(DEBUG)
+CXX = g++ -std=c++11
+RM = rm -rf *.o
 
-PA01 : PA01.o LinkedList.o Node.o PrecondViolatedExcep.o
-	$(CC) $(LFLAGS) -std=c++11 PrecondViolatedExcep.o Node.o LinkedList.o PA01.o -o PA01
+all: PAO1
 
-PA01.o : LinkedList.cpp PA01.cpp
-	$(CC) $(CFLAGS) -std=c++11 PA01.cpp
+#-v for debugging linking errors
+PAO1: 
+	$(CXX) -Wall -g *.cpp -o PAO1 
 
-LinkedList.o : LinkedList.h LinkedList.cpp ListInterface.h PrecondViolatedExcep.cpp
-	$(CC) $(CFLAGS) -std=c++11 LinkedList.cpp
-	
-PrecondViolatedExcep.o : PrecondViolatedExcep.cpp PrecondViolatedExcep.h
-	$(CC) $(CFLAGS) -std=c++11 PrecondViolatedExcep.cpp
-	
-Node.o : Node.h Node.cpp
-	$(CC) $(CFLAGS) -std=c++11 Node.cpp
-
-clean:
-	\rm *.o PA01
+clean: 
+	$(RM) PAO1

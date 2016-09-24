@@ -16,7 +16,11 @@
 #ifndef PVE_CPP
 #define PVE_CPP
 
-PrecondViolatedExcept::PrecondViolatedExcept(const string& message = "") : logic_error("Precondition Violated Exception:" + message) {
+#include "PrecondViolatedExcep.h"
+
+using namespace std;
+
+PrecondViolatedExcep::PrecondViolatedExcep(const string& message) : logic_error("Precondition Violated Exception:" + message) {
 }
 
 #endif
