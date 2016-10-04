@@ -1,4 +1,4 @@
-//  Created by Shehryar Khattak for CS302 Spring 2016 class.
+
 
 #include <iostream>
 #include <fstream>
@@ -7,12 +7,12 @@ int main(){
 
 	//Declerations (insert as needed)
 	int kSmall_pos;			//For User Input
-	int kSmall_val=0;		//Populate using your algorithm implementation
+	int kSmall_val = 0;		//Populate using your algorithm implementation
 	int pivot;		        //Pivot position in array
 
 	//User Input DO NOT MODIFY
-	std::cout<<"Please enter required kth smallest value:";
-	std::cin>>kSmall_pos;
+	cout << "Please enter required kth smallest value:";
+	cin >> kSmall_pos;
 
 
 	//File Read code (insert) - This code should be able to parse the data in a text file similar to the provided one and store values in an array for processing.
@@ -28,5 +28,5 @@ int main(){
 
 
 	//Output DO NOT MODIFY
-	std::cout<<"kth smallest value = "<<kSmall_val<<std::endl;
+	cout << "kth smallest value = " << kSmall_val << endl;
 }
