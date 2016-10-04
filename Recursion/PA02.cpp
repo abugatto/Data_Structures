@@ -20,7 +20,7 @@ int main() {
 
 	//kmsall algorithm implementation or function call (insert) - implement using recursion as indicated
 
-	kSmall_val = algorithm.find(kSmall_pos, 0, legnth);
+	kSmall_val = algorithm.find(kSmall_pos, 0, legnth - 1, legnth);
 
 	//Log file output (insert) - preferred in .txt format acoording to instructions posted on assignment page
 
@@ -28,4 +28,6 @@ int main() {
 
 	//Output DO NOT MODIFY
 	cout << "kth smallest value = " << kSmall_val << endl;
+
+	return 0;
 }

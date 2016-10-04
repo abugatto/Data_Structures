@@ -2,6 +2,7 @@
 #define KSMALL_H
 
 #include <iostream> 
+#include <string>
 #include <fstream>
 
 using namespace std;
@@ -13,33 +14,33 @@ public:
 	KSmall();
 	~KSmall();
 	int parse(const string& filename);
-	void trace() const;
-	int find(const int& k, const int& first, const int& last);
+	void trace(const int& pivot, const int& first, const int& legnth);
+	int partition(const int& first, const int& last);
+	int find(const int& k, const int& first, const int& last, const int& legnth);
 private:
 	int* list;
-	int* p;
-	int k, pivot;
+	int k;
+	string log;
 };
 
 //************************************************************************************************
 
-KSmall::kSmall() {
-	k = pivot = 0;
+KSmall::KSmall() {
+	remove("trace.txt");
 
+	log = "Test output of code:\n\n";
+
+	k = 0;
 	list = nullptr;
-	p = nullptr; 
 }
 
-KSmall::~kSmall() {
+KSmall::~KSmall() {
 	delete[] list;
 	list = nullptr;
-
-	delete p;
-	p = nullptr;
 }
 
 int KSmall::parse(const string& filename) {
-	fstream fin;
+	ifstream fin;
 
 	fin.open(filename);
 
@@ -55,8 +56,14 @@ int KSmall::parse(const string& filename) {
 	list = new int[legnth]; //makes an array as long as the legnth
 
 	for(int j = 0; j < legnth; j++) {
-		list[i] = temp[i];
+		list[j] = temp[j];
 	}
+	
+	/*
+	for(int a = 0; a < legnth; a++) { //TEST CODE
+		cout << "[" << list[a] << "]";
+	}
+	*/
 
 	delete[] temp;
 	temp = nullptr;
@@ -66,52 +73,78 @@ int KSmall::parse(const string& filename) {
 	return legnth;
 }
 
-void KSmall::trace() const { //NEEDS PIVOT
-	fstream fout;
+void KSmall::trace(const int& pivot, const int& first, const int& legnth) { //NEEDS PIVOT
+	ifstream fin;
+	ofstream fout;
 
-	fout.open("trace.txt");
-
-	fout << counter << ":\t";
-
-	int cntr = 0;
-	while(cntr <= legnth) {
+	for(int cntr = 0; cntr < legnth; cntr++) {
 		if(cntr == pivot) {
-			fout << " <[" << list[cntr] << "]> ";
+			log = log + "<[" + to_string(list[cntr]) + "]>";
 		} else {
-			fout << "[" << list[cntr] << "]";
+			log = log + "[" + to_string(list[cntr]) + "]";
 		}
 	}
-	fout << endl;
+	log = log + "\n";
 
-	fout.close();
+	if(k == pivot - first + 1) {
+		log = log + "\n\nThe kth smallest number is:\t" + to_string(list[pivot]);
+
+		fout.open("trace.txt");
+
+		fout << log << endl;
+
+		fout.close();
+	}
 }
 
-int KSmall::find(const int& k, const int& first, const int& last) {
-	
-	//Partition code:
-	pivot = last;
+int KSmall::partition(const int& first, const int& last) {
+	int pivot = first;
+	for(int i = first; i < last; i++) {
+		if(list[i] < list[last]) {
+			int temp = list[pivot]; //swap
+			list[pivot] = list[i];
+			list[i] = temp;
 
-	for(int i = 0;; i++) {
-		if(list[pivot - i + 1] < list[i]) { //compare [pivot-1] and [1]
-			int temp = list[pivot - i + 1];
-
-			list[pivot - i + 1] = list[i];
-			list[i] = temp; //smaller value being repositioned
+			pivot++;
 		}
+	}
+	int temp = list[pivot]; //swap
+	list[pivot] = list[last];
+	list[last] = temp;
 
+	return pivot;
+}
 
+int KSmall::find(const int& knum, const int& first, const int& last, const int& legnth) {
+	k = knum;
+
+	if((k > 0) && (k < legnth - first + 1)) {
+		int pivot = partition(first, last);
+
+	/*
+		for(int i = 0; i < legnth; i++) { //TEST CODE
+			if(i == pivot) {
+				cout << " <[" << list[i] << "]> ";
+			} else if(i == last){
+				cout << " ^[" << list[i] << "]^ ";
+			} else {
+				cout << "[" << list[i] << "]";
+			}
+		} cout << endl;
+	*/
+
+		trace(pivot, first, legnth);
+
+		if(k < pivot - first + 1) {
+			return find(k, first, pivot - 1, legnth);
+		} else if(k == pivot - first + 1) {
+			return list[pivot];
+		} else {
+			return find(k - (pivot - first + 1), pivot + 1, last, legnth);
+		}
 	}
 
-
-	//trace();
-
-	if(k < (pivot - first + 1)) {
-		return find(k, first, pivot - 1);
-	} else if(k == (pivot - first + 1)) {
-		return *p;
-	} else {
-		return find(k - (pivot - first + 1), pivot + 1, last);
-	}
+	return -1;
 }
 
 #endif
