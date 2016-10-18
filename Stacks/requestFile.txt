@@ -1,0 +1,8 @@
+Los Angeles, Houston
+Glendale, Houston
+Dallas, Austin
+Cleveland, Chicago
+Indianapolis, San Francisco
+San Francisco, Washington
+Boston, Columbia
+Miami, Denver

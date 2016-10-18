@@ -1,0 +1,31 @@
+Atlanta, Chicago	701 200
+Boise, Chicago	702 350
+Boston, Chicago	504 120
+Chicago, Atlanta	503 210
+Chicago, Boise	703 200
+Chicago, Boston	501 120
+Chicago, Houston	708 140
+Cleveland, Houston	709 130
+Columbia, Houston	710 140
+Dallas, Houston	711 110
+Denton, Houston	712 100
+Denver, Houston	713 130
+Houston, Glendale	750 145
+Houston, Cleveland	801 150
+Houston, Columbia	802 162
+Houston, Dallas	803 150
+Houston, Denton	804 184
+Houston, Denver	807 190
+Houston, Chicago	808 175
+Indianapolis, Los Angeles	809 160
+Los Angeles, Indianapolis	810	50
+Miami, Los Angeles	784 320
+Miami, Atlanta	774 246
+Atlanta, Miami	821 245
+Los Angeles, Miami	823 134
+San Francisco, Los Angeles	824 132
+Los Angeles, San Francisco	819 108
+Tampa, Los Angeles	178 184
+Los Angeles, Tampa	183 102
+Washington, Los Angeles	586 300
+Los Angeles, Washington	541 310
