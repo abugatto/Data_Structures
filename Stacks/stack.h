@@ -9,16 +9,18 @@ template<class T>
 class Stack;
 
 template<class S>
-class Node{
+class SNode {
 private:
-	Node(char, Node<S>*);
-	char data;
-	Node<S>* next;
+	SNode(S, SNode<S>*);
+	S data;
+	SNode<S>* next;
+
+	template<class T>
 	friend class Stack;
 };
 
 template<class T>
-class Stack{
+class Stack {
 public:
     Stack(int = 0);
     Stack(const Stack<T>&);
@@ -30,31 +32,28 @@ public:
     bool clear();
 
 private:
-	Node<T>* top;
+	SNode<T>* top;
 };
 
 template <class S>
-Node::Node(S c, Node<S>* node) 
-{
-    data = c;
+SNode<S>::SNode(S temp, SNode<S>* node) {
+    data = temp;
     next = node;
 }
 
 template <class T>
-Stack<T>::Stack(int i)
-{
+Stack<T>::Stack(int i) {
     top = NULL;
 }
 
 template <class T>
-Stack<T>::Stack(const Stack<T>& copy)
-{
-    top = new Node(copy.top->data, copy.top->next);
-    Node<T>* temp = top->next;
-    Node<T>* tempc = copy.top->next;
+Stack<T>::Stack(const Stack<T>& copy) {
+    top = new SNode<T>(copy.top->data, copy.top->next);
+    SNode<T>* temp = top->next;
+    SNode<T>* tempc = copy.top->next;
 
     while(tempc) {
-        temp = new Node(tempc->data, tempc->next);
+        temp = new SNode<T>(tempc->data, tempc->next);
         temp = temp->next;
         tempc = tempc->next;
     }
@@ -63,16 +62,14 @@ Stack<T>::Stack(const Stack<T>& copy)
 }
 
 template <class T>
-Stack<T>::~Stack()
-{
+Stack<T>::~Stack() {
     if(top) {
         top = top->next;
     }
 }
 
 template <class T>
-bool Stack<T>::clear()
-{
+bool Stack<T>::clear() {
     if(empty()) {
         return false;
     }
@@ -85,17 +82,16 @@ bool Stack<T>::clear()
 }
 
 template <class T>
-Stack& Stack<T>::operator=(const Stack<T>& copy)
-{
+Stack<T>& Stack<T>::operator=(const Stack<T>& copy) {
     if(this != &copy) { 
         clear();
 
-        top = new Node(copy.top->data, copy.top->next);
-        Node<T>* temp = top->next;
-        Node<T>* tempc = copy.top->next;
+        top = new SNode<T>(copy.top->data, copy.top->next);
+        SNode<T>* temp = top->next;
+        SNode<T>* tempc = copy.top->next;
 
         while(tempc) {
-            temp = new Node(tempc->data, tempc->next);
+            temp = new SNode<T>(tempc->data, tempc->next);
             temp = temp->next;
             tempc = tempc->next;
         }
@@ -107,30 +103,23 @@ Stack& Stack<T>::operator=(const Stack<T>& copy)
 }
 
 template <class T>
-bool Stack<T>::empty() const
-{
+bool Stack<T>::empty() const {
     return !top;
 }
 
 template <class T>
-bool Stack<T>::push(T c)
-{
-    if(full()) {
-        return false;
-    }
-
-    top = new Node(c, top);
+bool Stack<T>::push(T c) {
+    top = new SNode<T>(c, top);
     return true;
 }
 
 template <class T>
-bool Stack<T>::pop(T& c)
-{
+bool Stack<T>::pop(T& c) {
     if(empty()) {
         return false;
     }
 
-    Node<T>* temp = top;
+    SNode<T>* temp = top;
     c = top->data;
     top = top->next;
     delete[] temp;

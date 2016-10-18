@@ -11,15 +11,15 @@ class City {
 public:
 	City();
 	City(const string& n);
-	~Destination();
-	void set_name();
-	string get_name(); const
+	~City() {}
+	void set_name(const string&);
+	string get_name() const;
 	void set_visited();
 	void reset_visited();
-	bool has_been_visited(); const
+	bool has_been_visited() const;
 	void input_adjacency(City* Dptr);
-	bool adjecency_empty(); const
-	City* get_next_unvisited(); const
+	bool adjecency_empty() const;
+	City* get_next_unvisited();
 
 private:
 	string name;
@@ -27,34 +27,22 @@ private:
 	ListNode<City*> adjacencies;
 };
 
-/*
-class SMARTDESTINATION {
-public:
-	
-
-private:
-
-};
-*/
+//***************************************************************************
 
 City::City() {
 	visited = false;
 }
 
 City::City(const string& n) {
-	string = n;
+	name = n;
 	visited = false;
-}
-
-City::~City() {
-	adjacencies.clear();
 }
 
 void City::input_adjacency(City* Dptr) {
 	adjacencies.insertAfter(Dptr);
 }
 
-bool adjecency_empty() {
+bool City::adjecency_empty() const {
 	return adjacencies.isEmpty();
 }
 
@@ -70,11 +58,11 @@ void City::set_name(const string& n) {
 	name = n;
 }
 
-City::string get_name() {
+string City::get_name() const {
 	return name;
 }
 
-City::bool has_been_visited() {
+bool City::has_been_visited() const {
 	return visited;
 }
 
@@ -93,6 +81,5 @@ City* City::get_next_unvisited() {
 		return nullptr;
 	}
 }
-
 
 #endif

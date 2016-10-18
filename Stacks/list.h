@@ -32,7 +32,7 @@ public:
     
     bool insertAfter(T);
     bool insertBefore(T);
-    bool get(T&);
+    bool get(T&) const;
     bool remove(T&);
     
     void clear();
@@ -66,12 +66,12 @@ Node<S>::Node(S i, Node* link) {
 
 template <class T>
 ListNode<T>::ListNode() {
-	head = cursor = NULL;
+	head = cursor = nullptr;
 }
 
 template <class T>
 ListNode<T>::ListNode(const ListNode<T>& copy) {
-	head = cursor = NULL;
+	head = cursor = nullptr;
 	
 	head = new Node<T>(copy.head->data, copy.head->next);
 	cursor = head->next;
@@ -85,21 +85,21 @@ ListNode<T>::ListNode(const ListNode<T>& copy) {
 		temp = temp->next;
 	}
 
-	temp = NULL;
+	temp = nullptr;
 }
 
 template <class T>
 ListNode<T>::~ListNode() {
-	Node<T>* temp;
+	Node<T>* temp = nullptr;
 	while(temp) {
 		Node<T>* temp = head;
 		head = head->next;
 
 		delete temp;
-		temp = NULL;
+		temp = nullptr;
 	}
 
-	head = cursor = NULL;
+	head = cursor = nullptr;
 }
 
 template <class T>
@@ -110,10 +110,10 @@ void ListNode<T>::clear() {
 		head = head->next;
 
 		delete temp;
-		temp = NULL;
+		temp = nullptr;
 	}
 
-	head = cursor = NULL;
+	head = cursor = nullptr;
 }
 
 template <class T>
@@ -129,7 +129,7 @@ bool ListNode<T>::isFull() const {
 template <class T>
 ListNode<T>& ListNode<T>::operator = (const ListNode<T>& copy) {
 	if(this != &copy) {
-		head = cursor = NULL;
+		head = cursor = nullptr;
 
 		head = new Node<T>(copy.head->data, copy.head->next);
 		cursor = head->next;
@@ -143,7 +143,7 @@ ListNode<T>& ListNode<T>::operator = (const ListNode<T>& copy) {
 			temp = temp->next;
 		}
 
-		temp = NULL;
+		temp = nullptr;
 	}
 
 	return *this;
@@ -160,14 +160,14 @@ bool ListNode<T>::goToPrior() {
 		temp = temp->next;
 	}
 	cursor = temp;
-	temp = NULL;
+	temp = nullptr;
 
 	return true;
 }
 
 template <class T>
 bool ListNode<T>::insertAfter(T nodespace) {
-	Node<T>* temp = new Node<T>(nodespace, (isEmpty() || !cursor->next) ? NULL : cursor->next);
+	Node<T>* temp = new Node<T>(nodespace, (isEmpty() || !cursor->next) ? nullptr : cursor->next);
 	if(isEmpty()) {
 		head = temp;
 		cursor = head;
@@ -177,7 +177,7 @@ bool ListNode<T>::insertAfter(T nodespace) {
 	}
 
 	delete temp;
-	temp = NULL;
+	temp = nullptr;
 
 	return true;
 }
@@ -185,11 +185,11 @@ bool ListNode<T>::insertAfter(T nodespace) {
 template <class T>
 bool ListNode<T>::insertBefore(T nodespace) {
 	if(isEmpty()) {
-		Node<T>* temp = new Node<T>(nodespace, NULL);
+		Node<T>* temp = new Node<T>(nodespace, nullptr);
 		head = cursor = temp;
 
 		delete temp;
-		temp = NULL;
+		temp = nullptr;
 		return false;
 	}
 
@@ -198,7 +198,7 @@ bool ListNode<T>::insertBefore(T nodespace) {
 		head = cursor = temp;
 
 		delete temp;
-		temp = NULL;
+		temp = nullptr;
 		return true;
 	}
 
@@ -209,7 +209,7 @@ bool ListNode<T>::insertBefore(T nodespace) {
 }
 
 template <class T>
-bool ListNode<T>::get(T& nodespace) {
+bool ListNode<T>::get(T& nodespace) const {
 	if(isEmpty()) {
 		return false;
 	}
@@ -229,7 +229,7 @@ bool ListNode<T>::remove(T& nodespace) {
 	goToPrior();
 	cursor->next = temp; //cout << temp->data << endl;
 	cursor = cursor->next; 
-	temp = NULL; 
+	temp = nullptr; 
 
 	return true;
 }
@@ -277,7 +277,7 @@ ostream& operator << (ostream& c_out, const ListNode<P>& print) {
 			c_out << temp->data << " -> ";
 			temp = temp->next;
 		}
-		temp = NULL;
+		temp = nullptr;
 		c_out << endl << endl;
 	}
 
