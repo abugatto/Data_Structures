@@ -33,8 +33,7 @@ FLIGHTMAP1::FLIGHTMAP1(const string& citylist, const string& flightfile) {
 	fin.open(citylist); //for list
 
 	string* city_name = new string[200];
-	while(fin.good()) {
-		fin >> city_name[size];
+	while(fin >> city_name[size]) {
 		size++;
 	}
 
@@ -184,8 +183,7 @@ FLIGHTMAP2::FLIGHTMAP2(const string& citylist, const string& flightfile) {
 	fin.open(citylist); //for list
 
 	string* city_name = new string[200];
-	while(fin.good()) {
-		fin >> city_name[size];
+	while(fin >> city_name[size]) {
 		size++;
 	}
 
@@ -336,8 +334,7 @@ FLIGHTMAP3::FLIGHTMAP3(const string& citylist, const string& flightfile) {
 	fin.open(citylist); //for list
 
 	string* city_name = new string[200];
-	while(fin.good()) {
-		fin >> city_name[size];
+	while(fin >> city_name[size]) {
 		size++;
 	}
 

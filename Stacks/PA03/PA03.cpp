@@ -66,68 +66,42 @@ string** get_requests(int& request_num) {
 	fstream fin;
 	fin.open("requestFile.txt");
 
-	int str_num = 0;
+	int i = 0;
 	string OG, DN;
-	OG = DN = "";
 	string** temp = new string*[100];
 	for(int p = 0; p < 100; p++) {
 		temp[p] = new string[2];
 	}
 
-	char ctemp;
-	while(fin.good()) {
-		OG = DN = "";
+	while(fin >> OG >> DN) {
+		OG.erase(OG.length() - 1, OG.length()); //erasing comma
 
-		ctemp = fin.get();
-		while(ctemp != ',') {
-			OG += ctemp;
-			ctemp = fin.get();
-
-			//cout << ctemp;
-		}
-
-		ctemp = fin.get();
-		while(ctemp != '\n' && fin.good()) {
-			DN += ctemp;
-			ctemp = fin.get();
-
-			//cout << ctemp;
-		}
-
-		cout << OG << "->" << DN << endl;
-
-		for(int cities = 0; cities < 2; cities++) {
-			if(cities == 0) {
-				temp[str_num][cities] = OG;
+		for(int p = 0; p < 2; p++) {
+			if(p == 0) {
+				temp[i][p] = OG;
 			} else {
-				temp[str_num][cities] = DN;
+				temp[i][p] = DN;
 			}
 		}
 
-		str_num++;
+		i++;
 	}
 
-	for(int i = 0; i < str_num; i++) {
-		
-	}
+	string** requests = new string*[i];
+	for(int j = 0; j < i; j++) {
+		requests[j] = new string[2];
 
-	string** requests = new string*[str_num];
-	for(int request = 0; request < str_num; request++) {
-		requests[request] = new string[2];
-
-		for(int cities = 0; cities < 2; cities++) {
-			requests[request][cities] = temp[request][cities];
-			cout << requests[request][cities] << " ";
+		for(int k = 0; k < 2; k++) {
+			requests[j][k] = temp[j][k];
 		}
 	}
 
-	int counter = str_num;
-	while(counter >= 0) {
-		delete[] temp[counter];
-		counter--;
+	int c = i;
+	while(c >= 0) {
+		delete[] temp[c];
+		c--;
 	}
 	delete[] temp;
-	temp = nullptr;
 
 	fin.close();
 
